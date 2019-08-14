@@ -1,5 +1,12 @@
 const HttpError = require('./HttpError');
 
+/**
+ * Envuelve cada método del controlador para que
+ * pueda ser ejecutado correctamente cuando se
+ * hacer una petición al servidor
+ * @param method El método del controlador
+ * @returns {Function} Una función que contiene la petición y respuesta HTTP y es pasado a Express
+ */
 const methodHandler = (method) => async (request, response) => {
     try {
         const data = await method(request);
@@ -15,6 +22,10 @@ const methodHandler = (method) => async (request, response) => {
     }
 };
 
+/**
+ * Crea un puente entre el servidor HTTP y la base de datos Mongo
+ * @param controller Objeto que contiene las operaciones CRUD sobre determinado recurso
+ */
 module.exports = (controller) => {
     const newController = {};
 
