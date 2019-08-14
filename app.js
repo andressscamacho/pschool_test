@@ -24,10 +24,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-//app.use('/users', usersRouter);
 
-const configureDatabaseAndEndpoints = async () => {
+const connectToDatabase = async () => {
   await mongoose.connect('mongodb://localhost/pschool_test', {useNewUrlParser: true});
+};
+
+const configureEndpoints = async () => {
   app.use('/products', productsRouter);
   app.use('/orders', ordersRouter);
 
@@ -48,7 +50,12 @@ const configureDatabaseAndEndpoints = async () => {
   });
 };
 
-configureDatabaseAndEndpoints().then(() => {
+const initApp = async () => {
+  await connectToDatabase();
+  await configureEndpoints();
+};
+
+initApp().then(() => {
   console.log('Server initialized');
 });
 
