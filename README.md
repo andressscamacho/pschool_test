@@ -70,5 +70,4 @@ Teniendo en cuenta lo anterior se creó dos endpoints para la creación de produ
 
 ### Pedientes
 
-* Agregar filtros de búsqueda
 * Crear cliente para consumir datos
